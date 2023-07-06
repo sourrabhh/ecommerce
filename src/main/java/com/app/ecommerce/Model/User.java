@@ -7,12 +7,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+
+
 @Entity
 @Table(name = "users")
 public class User 
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "first_name")
@@ -74,5 +76,15 @@ public class User
         this.password = password;
     }
 
+    public User() {
+    }
+
+    // @Override
+    // public String toString() {
+    //     return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+    //             + ", password=" + password + "]";
+    // }
+
+    
   
 }

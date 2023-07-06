@@ -30,6 +30,9 @@ public class AuthenticationToken
     @JoinColumn(nullable = false, name = "user_Id")
     public User user;
 
+    public AuthenticationToken(User user2) {
+    }
+
     public String getToken() {
         return token;
     }

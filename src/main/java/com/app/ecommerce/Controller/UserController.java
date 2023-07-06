@@ -6,7 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.ecommerce.DTO.ResponseDto;
+import com.app.ecommerce.DTO.UserDto.SignInDto;
+import com.app.ecommerce.DTO.UserDto.SignInReponseDto;
 import com.app.ecommerce.DTO.UserDto.SignupDto;
+import com.app.ecommerce.Exception.CustomException;
 import com.app.ecommerce.Service.UserService;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
@@ -19,11 +22,15 @@ public class UserController
     UserService userService;
     // Sign up API
     @PostMapping(path = "/signup")
-    public ResponseDto signUp(@RequestBody SignupDto signupDto)
+    public ResponseDto SignUp(@RequestBody SignupDto signupDto) throws CustomException 
     {
-        return userService.signUp(signupDto);      
+
+        return userService.signup(signupDto);      
     }
 
-    //SignUp Api
+    @PostMapping("/signin")
+    public SignInReponseDto signIn(@RequestBody SignInDto signInDto) {
+        return userService.signIn(signInDto);
+    }
     
 }
