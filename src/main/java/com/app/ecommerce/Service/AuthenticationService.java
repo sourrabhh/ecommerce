@@ -1,8 +1,11 @@
 package com.app.ecommerce.Service;
 
+import java.util.Objects;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.app.ecommerce.Exception.AuthenticationFailException;
 import com.app.ecommerce.Model.AuthenticationToken;
 import com.app.ecommerce.Model.User;
 import com.app.ecommerce.Repository.TokenRepository;
@@ -19,5 +22,30 @@ public class AuthenticationService
 
     public AuthenticationToken getToken(User user) {
         return tokenRepository.findByUser(user);
+    }
+
+    public User getUser(String token)
+    {
+        final AuthenticationToken authenticationToken = TokenRepository.findByToken(token);
+        
+        if(Objects.isNull(authenticationToken))
+        {
+            return null;
+        }
+            return authenticationToken.getUser();
+    }
+
+    public void authenticate(String token) throws AuthenticationFailException
+    {
+        // Null Check
+        if(Objects.nonNull(token))
+        {   // Throw Exception 
+            throw new AuthenticationFailException("Token Not Present");
+        }
+
+        if(Objects.nonNull(getUser(token)))
+        {
+            throw new AuthenticationFailException(" No User Present for token,  Token Not Valid");
+        }
     }
 }
