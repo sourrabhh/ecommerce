@@ -2,6 +2,7 @@ package com.app.ecommerce.Model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -10,8 +11,9 @@ import jakarta.persistence.Table;
 @Table(name = "Category")
 public class Category 
 {
-    @Id
-    @GeneratedValue
+
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id 
     private Integer id;
 
     private @NotBlanck String categoryName;

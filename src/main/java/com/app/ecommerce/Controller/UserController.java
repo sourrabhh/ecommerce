@@ -20,11 +20,11 @@ public class UserController
 {
     @Autowired
     UserService userService;
+
     // Sign up API
     @PostMapping(path = "/signup")
     public ResponseDto SignUp(@RequestBody SignupDto signupDto) throws CustomException 
     {
-
         return userService.signup(signupDto);      
     }
 
