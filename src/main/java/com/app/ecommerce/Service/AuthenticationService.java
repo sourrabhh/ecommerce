@@ -21,12 +21,13 @@ public class AuthenticationService
     }
 
     public AuthenticationToken getToken(User user) {
+        System.out.println("In getToken Method");
         return tokenRepository.findByUser(user);
     }
 
     public User getUser(String token)
     {
-        final AuthenticationToken authenticationToken = TokenRepository.findByToken(token);
+        final AuthenticationToken authenticationToken = tokenRepository.findByToken(token);
         
         if(Objects.isNull(authenticationToken))
         {

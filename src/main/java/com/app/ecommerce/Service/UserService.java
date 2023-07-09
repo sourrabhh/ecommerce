@@ -40,7 +40,7 @@ public class UserService
         String encryptedpassword = signupDto.getPassword();
 
         try {
-            encryptedpassword = hashPassword(signupDto.getPassword());
+             encryptedpassword = hashPassword(signupDto.getPassword());
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
@@ -54,6 +54,7 @@ public class UserService
         // create the token
 
         final AuthenticationToken authenticationToken = new AuthenticationToken(user);
+        System.out.println("authenticationToken :: " +authenticationToken);
 
         authenticationService.saveConfirmationToken(authenticationToken);
         
@@ -67,33 +68,37 @@ public class UserService
         md.update(password.getBytes());
         byte[] digest = md.digest();
         String hash = DatatypeConverter
-                .printHexBinary(digest).toUpperCase();
-        return hash;
-    }
+                 .printHexBinary(digest).toUpperCase();
+         return hash;
+     }
 
-    public SignInReponseDto signIn(SignInDto signInDto1) {
+    public SignInReponseDto signIn(SignInDto signInDto) {
         // find user by email
 
-        User user = userRepository.findByEmail(signInDto1.getEmail());
-
+        User user = userRepository.findByEmail(signInDto.getEmail());
+        System.out.println("User Retrived :: "+user);
+        
         if (Objects.isNull(user)) {
             throw new AuthenticationFailException("user is not valid");
         }
-
+        System.out.println("@@@@@ above try block 1");
         // hash the password
-        try {
-            if (!user.getPassword().equals(hashPassword(signInDto1.getPassword()))) {
+         try {
+            System.out.println("password"+user.getPassword());
+            // if (!user.getPassword().equals(hashPassword(signInDto1.getPassword()))) 
+            if (!user.getPassword().equals(hashPassword(signInDto.getPassword()))){
                 throw new AuthenticationFailException("wrong password");
             }
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
 
         // compare the password in DB
         // if password match
 
         AuthenticationToken token = authenticationService.getToken(user);
 
+         System.out.println("@@@@@ above try block 2:: " +token);
         // retrive the token
 
         if (Objects.isNull(token)) {

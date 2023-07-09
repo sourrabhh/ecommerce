@@ -10,6 +10,5 @@ import com.app.ecommerce.Model.Category;
 // @Repository
 public interface CategoryRepository extends JpaRepository<Category, Integer> 
 {
-
     
 } 

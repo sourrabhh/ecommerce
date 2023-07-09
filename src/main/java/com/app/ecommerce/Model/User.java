@@ -79,12 +79,4 @@ public class User
     public User() {
     }
 
-    // @Override
-    // public String toString() {
-    //     return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-    //             + ", password=" + password + "]";
-    // }
-
-    
-  
 }

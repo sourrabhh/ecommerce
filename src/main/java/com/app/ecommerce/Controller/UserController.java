@@ -2,6 +2,7 @@ package com.app.ecommerce.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,7 +13,6 @@ import com.app.ecommerce.DTO.UserDto.SignupDto;
 import com.app.ecommerce.Exception.CustomException;
 import com.app.ecommerce.Service.UserService;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RequestMapping("/user")
 @RestController

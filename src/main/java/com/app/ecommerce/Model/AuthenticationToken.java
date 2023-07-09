@@ -1,6 +1,7 @@
 package com.app.ecommerce.Model;
 
 import java.util.Date;
+import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,7 +31,10 @@ public class AuthenticationToken
     @JoinColumn(nullable = false, name = "user_Id")
     public User user;
 
-    public AuthenticationToken(User user2) {
+     public AuthenticationToken(User user) {
+        this.user = user;
+        this.createdDate = new Date();
+        this.token = UUID.randomUUID().toString();
     }
 
     public String getToken() {
@@ -65,6 +69,8 @@ public class AuthenticationToken
         this.id = id;
     }
 
+     public AuthenticationToken() {
+    }
 }
 
 
