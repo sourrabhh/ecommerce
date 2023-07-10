@@ -11,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
@@ -18,7 +19,8 @@ import jakarta.persistence.Table;
 public class Wishlist 
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
+    @SequenceGenerator(name = "seq", initialValue = 1)
     private Integer id;
     
     @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
@@ -42,9 +44,9 @@ public class Wishlist
         this.product = product;
     }
 
-    public Wishlist(User user2, Product product2) {
-        this.user = user2;
-        this.product = product2;
+    public Wishlist(User user, Product product) {
+        this.user = user;
+        this.product = product;
         this.createdDate = new Date();
     }
 
@@ -79,6 +81,5 @@ public class Wishlist
     public void setProduct(Product product) {
         this.product = product;
     }
-
-    
+  
 }

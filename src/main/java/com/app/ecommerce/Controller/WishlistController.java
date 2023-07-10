@@ -18,7 +18,6 @@ import com.app.ecommerce.DTO.ProductDto;
 import com.app.ecommerce.Model.Product;
 import com.app.ecommerce.Model.User;
 import com.app.ecommerce.Model.Wishlist;
-import com.app.ecommerce.Repository.WishlistRepository;
 import com.app.ecommerce.Service.AuthenticationService;
 import com.app.ecommerce.Service.WishlistService;
 
@@ -27,14 +26,14 @@ import com.app.ecommerce.Service.WishlistService;
 public class WishlistController 
 {
      @Autowired 
-    WishlistRepository wishlistRepository;
+    WishlistService wishlistService;
 
     @Autowired
     AuthenticationService authenticationService;
 
     // Save Product in wishlist
     @PostMapping("/addtowishlist")
-    public ResponseEntity<ApiResponse> addToWishlist(@RequestBody Product product, @RequestParam String token)  
+    public ResponseEntity<ApiResponse> addToWishlist(@RequestBody Product product, @RequestParam("token") String token)  
     {
         // Authenticate the token
         authenticationService.authenticate(token);
@@ -44,8 +43,8 @@ public class WishlistController
 
         // save the item in wishlist
         Wishlist wishlist = new Wishlist(user, product);
-        
-        WishlistService.createWishlist(wishlist);
+
+        wishlistService.createWishlist(wishlist);
 
         ApiResponse apiResponse = new ApiResponse(true, "Item added in Wishlist");
         return new ResponseEntity<>(apiResponse, HttpStatus.CREATED);
@@ -60,7 +59,7 @@ public class WishlistController
 
         User user = authenticationService.getUser(token);
 
-        List<ProductDto> wishlistforUser = WishlistService.getWishlistForUser(user);
+        List<ProductDto> wishlistforUser = wishlistService.getWishlistForUser(user);
 
         return new ResponseEntity<>(wishlistforUser, HttpStatus.OK);
     }

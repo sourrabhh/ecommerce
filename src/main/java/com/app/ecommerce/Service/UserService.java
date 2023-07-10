@@ -17,6 +17,7 @@ import com.app.ecommerce.Model.AuthenticationToken;
 import com.app.ecommerce.Model.User;
 import com.app.ecommerce.Repository.UserRepository;
 
+import jakarta.transaction.Transactional;
 import jakarta.xml.bind.DatatypeConverter;
 
 @Service
@@ -28,6 +29,7 @@ public class UserService
      @Autowired
     AuthenticationService authenticationService;
     
+    @Transactional
     public ResponseDto signup(SignupDto signupDto) throws CustomException
     { 
         // check if user is already present

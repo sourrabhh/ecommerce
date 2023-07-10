@@ -3,12 +3,13 @@ package com.app.ecommerce.Repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+// import org.springframework.stereotype.Repository;
 
 import com.app.ecommerce.Model.User;
 import com.app.ecommerce.Model.Wishlist;
 
-@Repository
+@EnableJpaRepositories
 public interface WishlistRepository extends JpaRepository<Wishlist, Integer>
 {
     List<Wishlist> findAllByUser(User user);
