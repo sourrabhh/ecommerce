@@ -36,7 +36,7 @@ public class CategoryController
     }
 
     @PostMapping(path = "update/{categoryId}")
-    public Category updateCategory(@PathVariable Integer categoryId, @RequestBody Category category)
+    public Category updateCategory(@PathVariable int categoryId, @RequestBody Category category)
     {
         return categoryService.editCategory(categoryId, category);
     }

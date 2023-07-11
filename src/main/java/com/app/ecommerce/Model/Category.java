@@ -2,9 +2,7 @@ package com.app.ecommerce.Model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 
@@ -12,9 +10,8 @@ import jakarta.persistence.Table;
 @Table(name = "Category")
 public class Category 
 {
-    @Id 
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
-    @SequenceGenerator(name = "seq", initialValue = 1)
+    @Id
+    @GeneratedValue
     private Integer id;
 
     private @NotBlanck String categoryName;
@@ -69,5 +66,8 @@ public class Category
         return "Category [id=" + id + ", categoryName=" + categoryName + ", description=" + description + ", imgURL="
                 + imgURL + "]";
     }
-   
+
+    
+
+    
 }
