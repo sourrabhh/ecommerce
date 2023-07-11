@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
@@ -12,7 +13,8 @@ import jakarta.persistence.Table;
 public class User 
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_seq")
+    @SequenceGenerator(name = "users_seq", initialValue = 1)
     private Integer id;
 
     @Column(name = "first_name")
@@ -74,5 +76,7 @@ public class User
         this.password = password;
     }
 
-  
+    public User() {
+    }
+
 }
