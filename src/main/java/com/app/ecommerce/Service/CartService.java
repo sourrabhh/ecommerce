@@ -58,4 +58,15 @@ public class CartService
 
         return cartDto;
     }
+
+    public void deleteCartItem(Integer cartItemId, int userId) throws Exception 
+    {
+        // Check Item Id belongs to User
+        if(!cartRepository.existsById(cartItemId))
+        {
+            throw new Exception("Cart ID is invalid" +cartItemId);
+        }
+
+        cartRepository.deleteById(cartItemId);
+    }
 }

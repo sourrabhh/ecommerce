@@ -3,7 +3,9 @@ package com.app.ecommerce.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,6 +61,16 @@ public class CartController
     }
 
     // Delete Cart Item for User
+    @DeleteMapping("/delete/{cartItemId}")
+    public ResponseEntity<ApiResponse> deleteCartItem(@PathVariable int cartItemId ,@RequestParam String token) throws Exception
+    {
+        authenticationService.authenticate(token);
 
+        int userId = authenticationService.getUser(token).getId();
+
+        cartService.deleteCartItem(cartItemId, userId);
+
+        return new ResponseEntity<>(new ApiResponse(true, "Removed from Cart "), HttpStatus.OK);
+    }
 
 }
