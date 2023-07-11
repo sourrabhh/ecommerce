@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.app.ecommerce.DTO.ProductDto;
-import com.app.ecommerce.Exception.ProductNotExistException;
 import com.app.ecommerce.Model.Category;
 import com.app.ecommerce.Model.Product;
 import com.app.ecommerce.Repository.ProductRepository;
@@ -77,16 +77,5 @@ public class ProductService
         product.setPrice(productDto.getPrice());
 
         productRepository.save(product);
-    }
-
-    public Product findById(Integer product_id) throws ProductNotExistException
-    {
-        Optional<Product> optionalProduct = productRepository.findById(product_id);
-
-        if(optionalProduct.isEmpty())
-        {
-            throw new ProductNotExistException("Product is Invalid : "+product_id);
-        }
-        return optionalProduct.get();
     }
 }
