@@ -1,6 +1,7 @@
 package com.app.ecommerce.Model;
 
 import java.util.Date;
+import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,15 +11,16 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "token")
 public class AuthenticationToken 
-{
+{  
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
+    @SequenceGenerator(name = "seq", initialValue = 1)
     private Integer id;
 
     private String token;
@@ -29,6 +31,12 @@ public class AuthenticationToken
     @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
     @JoinColumn(nullable = false, name = "user_Id")
     public User user;
+
+     public AuthenticationToken(User user) {
+        this.user = user;
+        this.createdDate = new Date();
+        this.token = UUID.randomUUID().toString();
+    }
 
     public String getToken() {
         return token;
@@ -62,8 +70,9 @@ public class AuthenticationToken
         this.id = id;
     }
 
+     public AuthenticationToken() {
+    }
 }
-
 
 
 

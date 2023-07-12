@@ -1,5 +1,9 @@
 package com.app.ecommerce.DTO.UserDto;
 
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+
 public class SignupDto 
 {
     private String firstName;
@@ -7,7 +11,8 @@ public class SignupDto
     private String email;
     private String password;
 
-    
+    public SignupDto() {
+    }
 
     public String getFirstName() {
         return firstName;
@@ -27,9 +32,13 @@ public class SignupDto
     public void setEmail(String email) {
         this.email = email;
     }
+
+    @JsonProperty("password")
     public String getPassword() {
         return password;
     }
+
+    @JsonProperty("password")
     public void setPassword(String password) {
         this.password = password;
     } 
